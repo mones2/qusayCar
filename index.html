@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Car</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Are You Looking To Sell Your <span>Pre-Owned Car?</span></h1>
+    <h2>GET THE <span>BEST PRICE</span> IN A QUICK, SAFE AND EASY TRANSACTION</h2>
+
+    <form action="https://formspree.io/f/mzbljnel" method="POST" enctype="multipart/form-data">
+        <div class="info-section">
+            <h2>Customer Info</h2>
+            <div class="label-line"><input type="text" name="name" placeholder="Your Name"></div>
+            <div class="label-line"><input type="email" name="_replyto" placeholder="Your Email"></div>
+            <div class="label-line"><input type="text" name="phone" placeholder="Your Phone Number"></div>
+
+            <h2>Car Info</h2>
+            <div class="label-line"><input type="text" name="make" placeholder="Car Make (e.g., Toyota)"></div>
+            <div class="label-line"><input type="text" name="model" placeholder="Car Model (e.g., Corolla)"></div>
+            <div class="label-line"><input type="text" name="year" placeholder="Year of Manufacture"></div>
+            <div class="label-line"><textarea name="additionalInfo" placeholder="Additional Information about the car"></textarea></div>
+
+            <div class="file-input-container">
+                <label class="camera-icon" for="carImage">
+                    <i class="fas fa-camera"></i> Upload Car Photo
+                </label>
+                <input type="file" id="carImage" name="carImage" accept="image/*">
+            </div>
+
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+</html>
