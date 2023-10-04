@@ -1,36 +1,75 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const carImageInput = document.getElementById("carImage");
+    const carImageInput = document.getElementById("carImages");
     const submitButton = document.querySelector("input[type='submit']");
+    const vinBtn = document.getElementById("vinBtn");
+    const plateBtn = document.getElementById("plateBtn");
+    const idInput = document.getElementById("idValue");
+    const stateSelect = document.getElementById("stateSelect");
+
+    function toggleIDInput(option) {
+        if (option === 'vin') {
+            vinBtn.classList.add("active");
+            plateBtn.classList.remove("active");
+            idInput.placeholder = "Enter VIN";
+            idInput.name = "vin";
+            stateSelect.style.display = "none";  // Hide the state dropdown
+        } else if (option === 'plate') {
+            vinBtn.classList.remove("active");
+            plateBtn.classList.add("active");
+            idInput.placeholder = "License Plate";
+            idInput.name = "licensePlate";
+            stateSelect.style.display = "inline-block";  // Show the state dropdown
+        }
+    }
+
+    // Initial setup: make sure correct fields are displayed based on selected option
+    if (vinBtn.classList.contains("active")) {
+        toggleIDInput('vin');
+    } else if (plateBtn.classList.contains("active")) {
+        toggleIDInput('plate');
+    }
+
+    // Attach the toggle function to buttons
+    vinBtn.addEventListener('click', function() {
+        toggleIDInput('vin');
+    });
+
+    plateBtn.addEventListener('click', function() {
+        toggleIDInput('plate');
+    });
 
     carImageInput.addEventListener("change", function (event) {
-        if (this.files && this.files[0]) {
-            let label = document.querySelector(".camera-icon");
-            label.innerHTML = `<i class="fas fa-camera"></i> ${this.files[0].name}`;
+        const container = document.querySelector('.file-input-container');
+        const existingPreviews = container.querySelectorAll('img');
+        existingPreviews.forEach(img => container.removeChild(img));
 
-            // Display a preview of the uploaded image
-            const imgPreview = document.createElement('img');
-            imgPreview.src = URL.createObjectURL(this.files[0]);
-            imgPreview.style.maxWidth = '300px';
-            imgPreview.style.marginTop = '10px';
-            const container = document.querySelector('.file-input-container');
-            // Remove existing preview
-            const existingPreview = container.querySelector('img');
-            if (existingPreview) {
-                container.removeChild(existingPreview);
-            }
-            container.appendChild(imgPreview);
+        if (this.files && this.files.length > 0) {
+            Array.from(this.files).forEach(file => {
+                const imgPreview = document.createElement('img');
+                imgPreview.src = URL.createObjectURL(file);
+                imgPreview.style.maxWidth = '300px';
+                imgPreview.style.marginTop = '10px';
+                container.appendChild(imgPreview);
+            });
         }
     });
 
     submitButton.addEventListener("click", function (event) {
-        const nameInput = document.querySelector("input[name='name']");
-        const emailInput = document.querySelector("input[name='email']");
-        const phoneInput = document.querySelector("input[name='phone']");
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea, select');
+        let allFilled = true;
 
-        // Simple validation for demonstration
-        if (!nameInput.value || !emailInput.value || !phoneInput.value) {
-            alert("Please fill out the customer info section.");
-            event.preventDefault(); // This will prevent the form from submitting if the validation fails.
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                allFilled = false;
+                input.classList.add('invalid');  // Add 'invalid' class
+            } else {
+                input.classList.remove('invalid');  // Remove 'invalid' class if input is filled
+            }
+        });
+
+        if (!allFilled) {
+            alert('Please fill out all fields before submitting.');
+            event.preventDefault();
         }
     });
 });

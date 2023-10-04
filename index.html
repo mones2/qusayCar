@@ -6,35 +6,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sell Your Car</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+
+<body >
     <h1>Are You Looking To Sell Your <span>Pre-Owned Car?</span></h1>
     <h2>GET THE <span>BEST PRICE</span> IN A QUICK, SAFE AND EASY TRANSACTION</h2>
 
     <form action="https://formspree.io/f/mzbljnel" method="POST" enctype="multipart/form-data">
+
         <div class="info-section">
+            <!-- Customer Info -->
             <h2>Customer Info</h2>
-            <div class="label-line"><input type="text" name="name" placeholder="Your Name"></div>
-            <div class="label-line"><input type="email" name="_replyto" placeholder="Your Email"></div>
-            <div class="label-line"><input type="text" name="phone" placeholder="Your Phone Number"></div>
-
-            <h2>Car Info</h2>
-            <div class="label-line"><input type="text" name="make" placeholder="Car Make (e.g., Toyota)"></div>
-            <div class="label-line"><input type="text" name="model" placeholder="Car Model (e.g., Corolla)"></div>
-            <div class="label-line"><input type="text" name="year" placeholder="Year of Manufacture"></div>
-            <div class="label-line"><textarea name="additionalInfo" placeholder="Additional Information about the car"></textarea></div>
-
-            <div class="file-input-container">
-                <label class="camera-icon" for="carImage">
-                    <i class="fas fa-camera"></i> Upload Car Photo
-                </label>
-                <input type="file" id="carImage" name="carImage" accept="image/*">
+            <div class="label-line">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name">
+            </div>
+            <div class="label-line">
+                <label for="_replyto">Your Email:</label>
+                <input type="email" id="_replyto" name="_replyto" placeholder="Your Email">
+            </div>
+            <div class="label-line">
+                <label for="phone">Your Phone Number:</label>
+                <input type="text" id="phone" name="phone" placeholder="Your Phone Number">
             </div>
 
-            <input type="submit" value="Submit">
+            <!-- Car Identification Info -->
+            <h2>Identification Info</h2>
+           <div class="id-container">
+    <div class="toggle-options">
+        <button type="button" id="vinBtn" class="toggle-btn active" onclick="toggleIDInput('vin')">VIN</button>
+        <button type="button" id="plateBtn" class="toggle-btn" onclick="toggleIDInput('plate')">License Plate</button>
+    </div>
+    <div class="input-group">
+        <input type="text" id="idValue" name="idValue" placeholder="Enter a License Plate">
+
+        <!-- Add the state dropdown here -->
+        <select id="stateSelect" name="state" style="display:none;">
+            <option value="">Select State</option>
+    <option value="Alabama">Alabama</option>
+    <option value="Alaska">Alaska</option>
+    <option value="Arizona">Arizona</option>
+    <option value="Arkansas">Arkansas</option>
+    <option value="California">California</option>
+    <option value="Colorado">Colorado</option>
+    <option value="Connecticut">Connecticut</option>
+    <option value="Delaware">Delaware</option>
+    <option value="Florida">Florida</option>
+    <option value="Georgia">Georgia</option>
+    <option value="Hawaii">Hawaii</option>
+    <option value="Idaho">Idaho</option>
+    <option value="Illinois">Illinois</option>
+    <option value="Indiana">Indiana</option>
+    <option value="Iowa">Iowa</option>
+    <option value="Kansas">Kansas</option>
+    <option value="Kentucky">Kentucky</option>
+    <option value="Louisiana">Louisiana</option>
+    <option value="Maine">Maine</option>
+    <option value="Maryland">Maryland</option>
+    <option value="Massachusetts">Massachusetts</option>
+    <option value="Michigan">Michigan</option>
+    <option value="Minnesota">Minnesota</option>
+    <option value="Mississippi">Mississippi</option>
+    <option value="Missouri">Missouri</option>
+    <option value="Montana">Montana</option>
+    <option value="Nebraska">Nebraska</option>
+    <option value="Nevada">Nevada</option>
+    <option value="New Hampshire">New Hampshire</option>
+    <option value="New Jersey">New Jersey</option>
+    <option value="New Mexico">New Mexico</option>
+    <option value="New York">New York</option>
+    <option value="North Carolina">North Carolina</option>
+    <option value="North Dakota">North Dakota</option>
+    <option value="Ohio">Ohio</option>
+    <option value="Oklahoma">Oklahoma</option>
+    <option value="Oregon">Oregon</option>
+    <option value="Pennsylvania">Pennsylvania</option>
+    <option value="Rhode Island">Rhode Island</option>
+    <option value="South Carolina">South Carolina</option>
+    <option value="South Dakota">South Dakota</option>
+    <option value="Tennessee">Tennessee</option>
+    <option value="Texas">Texas</option>
+    <option value="Utah">Utah</option>
+    <option value="Vermont">Vermont</option>
+    <option value="Virginia">Virginia</option>
+    <option value="Washington">Washington</option>
+    <option value="West Virginia">West Virginia</option>
+    <option value="Wisconsin">Wisconsin</option>
+    <option value="Wyoming">Wyoming</option>
+        </select>
+    </div>
+</div>
+
+
+            <!-- Other Car Info -->
+            <h2>Car Info</h2>
+            <div class="label-line">
+                <label for="make">Car Make:</label>
+                <input type="text" id="make" name="make" placeholder="Car Make (e.g., Toyota)">
+            </div>
+            <div class="label-line">
+                <label for="model">Car Model:</label>
+                <input type="text" id="model" name="model" placeholder="Car Model (e.g., Corolla)">
+            </div>
+            <div class="label-line">
+                <label for="year">Year of Manufacture:</label>
+                <input type="text" id="year" name="year" placeholder="Year of Manufacture">
+            </div>
+            <div class="label-line">
+                <label for="additionalInfo">Additional Information:</label>
+                <textarea id="additionalInfo" name="additionalInfo" placeholder="Additional Information about the car"></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="file-input-container">
+    <label class="camera-icon" for="carImages">
+        <i class="fas fa-camera"></i> Upload Car Photos
+    </label>
+    <input type="file" id="carImages" name="carImages[]" accept="image/*" multiple>
+</div>
+
+
+           <input type="submit" id="submitButton" value="Submit">
         </div>
     </form>
+
+    <!-- JS Script -->
+    <script src="Script.js"></script>
+
+
 </body>
 </html>
